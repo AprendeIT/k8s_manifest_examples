@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: envvar
+  name: envar-test
+spec:
+  containers:
+    - env:
+      - name: VARIABLE1
+        value: "mi valor"
+      - name: VARIABLE2
+        value: "mi valor 2"
+      name: envar-test
+      image: nginx:alpine

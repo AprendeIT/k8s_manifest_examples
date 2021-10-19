@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: default-mem-demo-nodo
+spec:
+  containers:
+  - name: default-mem-demo-nodo
+    image: nginx
+    resources:
+      limits:
+        memory: 10Gi
+      requests:
+        memory: 10Gi

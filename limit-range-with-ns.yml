@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: develop
+  labels:
+    name: develop
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-range-develop
+  namespace: develop
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+      cpu: 2
+    defaultRequest:
+      memory: 512Mi
+      cpu: 2
+    type: Container
