@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-vars
+  labels: 
+    app: env-vars
+data:
+  dbhost: 10.0.0.1
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-simple
+spec:
+  containers:
+  - name: pod-simple
+    image: nginx:alpine
+    env:
+      - name: DB_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: env-vars
+            key: dbhost
