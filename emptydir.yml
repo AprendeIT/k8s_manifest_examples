@@ -1,0 +1,14 @@
+apiversion: v1
+kind: Pod
+metadata:
+  name: pod-ed
+spec:
+  containers
+  - image: nginx:alpine
+  name: test-container
+  volumeMounts:
+  - mountPath: /cache
+    name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
