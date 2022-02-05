@@ -2,6 +2,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: task-pv-volume
+  labels:
+    type: nfs1
 spec:
   storageClassName: manual
   capacity:
@@ -24,3 +26,6 @@ spec:
   resources:
     requests:
       storage: 10Gi
+  selector:
+    matchLabels:
+      type: nfs1
