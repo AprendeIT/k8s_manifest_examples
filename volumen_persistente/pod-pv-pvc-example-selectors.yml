@@ -29,3 +29,19 @@ spec:
   selector:
     matchLabels:
       type: nfs1
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-volumen1
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: mypv-volume-storage
+  volumes:
+    - name: mypv-volume-storage
+      persistentVolumeClaim:
+        claimName: mypv-volume-claim

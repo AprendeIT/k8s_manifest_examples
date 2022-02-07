@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume2
+  name: mypv-volume2
   labels:
     type: nfs2
 spec:
@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume1
+  name: mypv-volume1
   labels:
     type: nfs1
 spec:
@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: task-pv-volume-claim
+  name: mypv-volume-claim
 spec:
   storageClassName: manual
   accessModes:
