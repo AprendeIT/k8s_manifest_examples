@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-simple
+  labels: 
+    app: pod-simple
+data:
+  index.php: |+
+    <h1>
+      <?php phpinfo(); ?>
+    </h2>
+  hostname.php: |+
+    <h1>
+      <?php echo `hostname`; ?>
+    </h2>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  labels:
+    app: php-web
+  name: php-web
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 10
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: php-web
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: php-web
+    spec:
+      containers:
+      - image: php:7-apache
+        volumeMounts:
+        - name: pod-simple
+          mountPath: /var/www/html
+        imagePullPolicy: IfNotPresent
+        name: php-web
+      volumes:
+      - name: pod-simple
+        configMap:
+          name: pod-simple
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  replicas: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: php-web
+  namespace: default
+  name: nginx
+spec:
+  externalIPs:
+  - 10.0.40.55
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: php-web
+  sessionAffinity: None
+  type: ClusterIP
