@@ -1,2 +1,3 @@
-#Oficial links to fibre channel volumes example
-https://github.com/kubernetes/examples/tree/master/staging/volumes/fibre_channel
+# Manifiestos de ejemplo para kubernetes
+
+En este repo se encuentran los manifiestos de ejemplo del libro Kubernetes desde cero
